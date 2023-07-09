@@ -1,0 +1,208 @@
+* {
+  padding: 0%;
+  margin: 0%;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+.section-p1 {
+  padding: 40px 80px;
+}
+
+.section-m1 {
+  margin: 40px 0;
+}
+
+/* header mawa */
+
+#header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 80px;
+  background-color: blanchedalmond;
+  box-shadow: 0 5px 15px rgb(0, 0, 0, 0.06);
+  z-index: 999;
+  position: sticky;
+  top: 0;
+  left: 0;
+}
+#header div img{
+  height: 10vh;
+}
+.nav {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  background-color: skyblue;
+  
+}
+.nav h3 {
+  padding: 3%;
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  float: left;
+}
+#navlist {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#navlist li {
+  list-style: none;
+  padding: 0 20px;
+  position: relative;
+}
+#navlist li a {
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a1a;
+  transition: 0.3s ease;
+}
+
+#navlist li a:hover {
+  color: aquamarine;
+}
+
+#navlist li a:hover,
+#navlist li a.active {
+  color: aquamarine;
+  /* text-decoration-line: underline; */
+}
+
+#navlist li a.active::after,
+#navlist li a:hover::after {
+  content: "";
+  width: 30%;
+  height: 2px;
+  background-color: aqua;
+  position: absolute;
+  bottom: -4px;
+  left: 20px;
+}
+
+#weatherData {
+  width: 23%;
+  min-width: 250px;
+  padding: 10px 12px;
+  border: 1px solid #cce7d0;
+  border-radius: 25px;
+  cursor: pointers;
+  box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.02);
+  margin: 15px 0;
+  transition: 0.2s ease;
+  position: relative;
+  display: none;
+}
+
+#weatherData:hover {
+  box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.06);
+}
+
+.search {
+  padding: 0px; 
+  width: 50%;
+  margin-bottom:1% ;
+  margin-left: 20%;
+   border: 1px solid black; 
+  border-radius: 15px;
+  position:relative;
+  display: flex;
+  height: fit-content;
+  align-items: center;
+}
+.search input,button{
+  border: none;
+}
+
+.search input{
+   width: 90%;
+   background: none;
+   text-align: center;
+   border: none;
+   box-sizing: border-box;
+   text-decoration-color: black;
+}
+.search input[type=text] {
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 0px solid red;
+}
+
+.search button{
+  background: none;
+  height: 7vh;
+  margin: 0;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.search button:hover{
+  background-color: black;
+  color: white;
+}
+
+.para{
+  padding: 5%;
+  word-wrap: break-word;
+  font-family: 'Courier New', Courier, monospace;
+  background-color: blanchedalmond;
+}
+
+.section-p1 h3{
+  font-weight: 800;
+  font-stretch: extra-condensed;
+}
+
+
+#weatherData1 {
+  width: 23%;
+  min-width: 250px;
+  padding: 10px 12px;
+  border: 1px solid #cce7d0;
+  border-radius: 25px;
+  cursor: pointers;
+  box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.02);
+  margin: 15px 0;
+  transition: 0.2s ease;
+  position: relative;
+  display: none;
+}
+
+#weatherData1:hover {
+  box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.06);
+}
+
+footer {
+  background-color: black;
+  color: white;
+  padding: 10px;
+  margin: 20px;
+}
+footer table td {
+  padding: 10px 70px;
+  margin: 10px;
+}
+footer a {
+  text-decoration: none;
+  padding: 10px;
+  color: white;
+}
+
+.faq {
+  text-align: left;
+  margin-top: 40px;
+  background-color: blanchedalmond;
+}
+
+.question {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.answer {
+  margin-bottom: 20px;
+}

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Whether Web</title>
+    <link rel="stylesheet" href="style.css" />
+    <script
+    src="https://kit.fontawesome.com/36979c25f7.js"
+    crossorigin="anonymous"
+  ></script>
+  </head>
+  <body>
+    <section id="header">
+      <div> <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS62LW7Nc8sS7kYRFlQjxJTLeHBDqtr8FNKRA&usqp=CAU"/></div> 
+      <ul id="navlist">
+        <li><a href="#">Home</a></li>
+        <li><a href="#sea">Search Location</a></li>
+        <li><a href="#searchlochis">Location History</a></li>
+        <li><a href="#About">About</a></li>
+        <li><a href="#" onclick="ha()">Other sites</a></li>
+      </ul>
+    </div>
+    </section>
+    <section  class="section-p1">
+     <center>
+      <h1><u>Current Whether</u></h1>
+      </center>
+      <div class="search">
+      <input type="text" id="locationInput" placeholder="Enter a location">
+      <button  id="btn" onclick="getWeather()">Get Weather</button>
+      </div>
+      <center>
+      <div id="weatherData"></div>
+     </center>
+   
+    </section>
+    <section class="section-p1">
+      <div class="para">
+        <h2><u>Current Whether</u></h2>
+      <p>
+        The current weather refers to the atmospheric conditions observed at a specific location during the present moment. It includes various elements such as temperature, humidity, wind speed and direction, precipitation, cloud cover, and atmospheric pressure. The current weather provides real-time information about the immediate atmospheric state, allowing us to understand and experience the conditions outdoors. This information is typically obtained through weather stations, weather satellites, and other observation systems. People rely on current weather updates to plan their daily activities, dress appropriately, and make informed decisions related to travel, outdoor events, or any other weather-sensitive plans. Weather forecasting services and applications provide up-to-date current weather reports, allowing individuals and organizations to stay informed about the atmospheric conditions in their area.
+      </p>
+      </div>
+    </section>
+    <section  class="section-p1">
+      <center>
+        <h1 id="sea"><u>Search Location</u></h1>
+      </center>
+       <div class="search">
+       <input type="text" id="in" placeholder="Enter a location">
+       <button  id="btn" onclick="hai()">Search....</button>
+       </div>
+       <center>
+       <div id="weatherData1"></div>
+
+      </center>
+    </section>
+      <section class="section-p1">
+        <div class="para">
+          <h2><u>Search location</u></h2>
+        <p>Search location refers to the process of finding specific geographic or place-related information based on user input or search queries. In today's digital age, search location has become an integral part of various applications and services that provide location-based functionalities. It allows users to enter a specific address, landmark, or even general keywords to retrieve relevant information about that particular location. This information can include details such as the name of the place, its coordinates (latitude and longitude), address, nearby points of interest, and other relevant data. Search location services utilize various technologies, including geocoding and mapping systems, to accurately identify and retrieve information about a requested location. Whether it's finding directions, exploring nearby businesses, or simply gaining knowledge about a specific place, search location plays a crucial role in helping users navigate and interact with the world around them.</p>
+        </div>
+      </section>
+      <section  class="section-p1">
+        <center>
+          <h1 id="searchlochis"><u>Search Location History</u></h1>
+        </center>
+         <div class="search">
+         <input type="text" id="ins" placeholder="Enter a location">
+         <input type="date" id="ins1" placeholder="Enter date">
+         <button  id="btn" onclick="ha()">Search</button>
+         </div>
+         <center>
+         <div id="weatherData12"></div>
+  
+        </center></section>
+        <section class="section-p1">
+          <div class="para">
+            <h2><u>Search location History</u></h2>
+          <p>
+            Location history search is a feature that allows users to retrieve information about their past locations based on their recorded data. With location history search, individuals can track and review their movements over a specific time period. This feature utilizes the data collected from various sources, such as GPS signals and mobile network data, to provide a comprehensive overview of the places a user has visited. By analyzing timestamps and coordinates, location history search enables users to recall their previous activities, such as the routes they took, the duration of their visits, and even the distance traveled. This tool proves useful in various scenarios, such as reminiscing about past travels, retracing steps to find lost items, or simply gaining insights into personal movement patterns. However, it's important to note that location history search relies on user consent and privacy settings, ensuring that individuals have control over the data collected and can manage its accessibility.</p>
+          </div>
+        </section>
+    <script>
+      function getWeather() {
+        const locationInput = document.getElementById('locationInput');
+        var location = locationInput.value;
+        const apiKey = "0fb74f02ff0c47df950131026230107";
+        if(location=="")
+        {
+          location ="vizag";
+        }
+        // Fetch weather data from the API for the specified location
+        fetch(`https://api.weatherapi.com/v1/current.json?key=0fb74f02ff0c47df950131026230107&q=${location} &aqi=yes`)
+          .then(response => response.json())
+          .then(data => {
+            // Extract the relevant information
+            const location = data.location;
+            const current = data.current;
+            document.getElementById('weatherData').style.display="block";
+            // Build the HTML to display the weather data
+            const weatherDataElement = document.getElementById('weatherData');
+            weatherDataElement.innerHTML = `
+              <h2><b>Location:</b> ${location.name}, ${location.region}, ${location.country}</h2>
+              <p><b>Local Time:</b> ${location.localtime}</p>
+              <h3>Current Weather</h3>
+              <p><b>Temperature:</b> ${current.temp_c}°C (${current.temp_f}°F)</p>
+              <p><b>Condition:</b> ${current.condition.text}</p>
+              <img src="${current.condition.icon}" alt="${current.condition.text}">
+              <p><b>Wind:</b> ${current.wind_kph} km/h ${current.wind_dir}</p>
+              <p><b>Humidity:</b> ${current.humidity}%</p>
+              <p><b>Pressure:</b> ${current.pressure_mb} mb (${current.pressure_in} in)</p>
+              <p><b>Visibility:<b> ${current.vis_km} km (${current.vis_miles} miles)</p>
+              <p><b>UV Index:</b> ${current.uv}</p>
+              <p><b>Air Quality: US EPA Index:</b>${current.air_quality['us-epa-index']}, <b>GB Defra Index:</b> ${current.air_quality['gb-defra-index']}</p>
+            `;
+          })
+          .catch(error => {
+            console.error('Error fetching weather data:', error);
+          });
+      }
+
+      // Assuming you are using JavaScript
+
+// Make the API call
+function hai(){
+const loc = document.getElementById('in');
+var lo = loc.value;
+if(lo=="")
+        {
+          lo ="vizag";
+        }
+fetch(`https://api.weatherapi.com/v1/search.json?key=0fb74f02ff0c47df950131026230107&q=${lo}`)
+  .then(response => response.json())
+  .then(data => {
+    // Create a variable to store the weather data
+    let weatherData1 = '';
+    document.getElementById('weatherData1').style.display="block";
+    // Loop through the retrieved data
+    for (let i = 0; i < data.length; i++) {
+      const id = data[i].id;
+      const name = data[i].name;
+      const region = data[i].region;
+      const country = data[i].country;
+      const lat = data[i].lat;
+      const lon = data[i].lon;
+      const url = data[i].url;
+
+      // Append the data to the weatherData variable
+      weatherData1 += `<b>ID:</b> ${id}<br>
+                      <b>Name:</b> ${name}<br>
+                      <b>Region:</b> ${region}<br>
+                      <b>Country:</b> ${country}<br>
+                      <b>Latitude:</b> ${lat}<br>
+                      <b>Longitude:</b> ${lon}<br>
+                      <b>URL:</b> ${url}<br><br>`;
+    }
+
+    // Update the HTML element with the retrieved data
+    document.getElementById('weatherData1').innerHTML = weatherData1;
+
+  });
+  }
+  function ha()
+  {
+    alert("Under Construction");
+  }
+
+    </script>
+    <section class="section-p1">
+     <div class="para">
+      <h2><u>About page</u></h2>
+    <p>
+      Welcome to our website! We are committed to providing you with a comprehensive and user-friendly experience through our app, which offers a range of features to keep you informed and empowered.</p>
+
+     <p> One of the key features of our app is its robust forecasting capability. Powered by advanced algorithms and extensive meteorological data, our app provides accurate weather forecasts for various timeframes. Whether you need to plan your day, prepare for outdoor activities, or stay informed about potential weather events, our forecasting feature ensures you are always one step ahead.</p>
+      
+     <p> Additionally, our app allows you to access real-time weather information with just a few taps. Whether you want to know the temperature, humidity, or wind speed for your current location or any other place of interest, our app provides up-to-date and reliable data. Stay informed about the immediate atmospheric conditions and make informed decisions based on the latest information.</p>
+      
+    <p>  As part of our commitment to providing a personalized experience, our app also offers location history functionality. With your consent, we securely collect and store location data to enhance your app experience. This feature allows us to provide tailored recommendations, track your exercise routes, and help you discover nearby points of interest. Rest assured that we handle your data responsibly and prioritize your privacy and security.</p>
+      
+     <p> We are dedicated to continually improving our app and ensuring that it meets your needs and expectations. Your feedback and suggestions are invaluable to us as we strive to deliver an exceptional user experience.</p>
+      
+    <p>  Thank you for choosing our app...
+    </p>
+    </div>
+    </section>
+    <section id="bg" class="section-p1">
+      
+
+      <div class="faq" id="f">
+        <u><h1>Frequently Asked Questions</h1></u>
+        <div class="question">1.What is a weather site?</div>
+        <div class="answer">A weather site is a website that provides information and forecasts about the weather conditions in specific locations. It typically includes details such as temperature, humidity, precipitation, wind speed, and forecasts for future days.</div>
+      
+        <div class="question">2. How accurate are weather sites?</div>
+        <div class="answer">The accuracy of weather sites can vary depending on the source of the data and the algorithms used for forecasting. Generally, weather sites strive to provide accurate information, but it's important to note that weather predictions can sometimes be subject to uncertainties and changes.</div>
+      
+        <div class="question">3. How often are weather sites updated?</div>
+        <div class="answer">Weather sites typically update their data regularly, with most sites providing hourly updates for current weather conditions. Forecast data is usually updated multiple times a day to provide the most up-to-date predictions.</div>
+      
+        <div class="question">4. Are weather sites accessible on mobile devices?</div>
+        <div class="answer">Yes, most weather sites are mobile-friendly and can be accessed through mobile web browsers or dedicated weather apps. Mobile versions often provide a simplified and user-friendly interface for quick access to weather information on the go.</div>
+      
+        <div class="question">5. Can weather sites provide localized forecasts?</div>
+        <div class="answer">Yes, weather sites can provide localized forecasts based on specific locations. By entering or allowing access to your location, weather sites can provide weather information tailored to your area, including current conditions and forecasts.</div>
+      </div>
+     
+    
+    </section>
+  </body>
+  <footer>
+    <table>
+      <tr>
+        <td><h3><u>Table of content</u></h3></td>
+        <td><h3><u>Contact</u></h3></td>
+      </tr>
+      <tr><td><a href="#">Whether App</a></td>
+          <td><a href="https://www.instagram.com/yaswanthkarri2004/?hl=en"><i class="fa-brands fa-instagram fa-lg" style="color: white;"></i>yaswanthkarri2004</a></td>
+      </tr>
+      <tr>
+        <td><a href="#sea">Search location</a></td>
+        <td><a href="https://www.linkedin.com/in/yaswanth-karri-581111259"><i class="fa-brands fa-linkedin fa-lg" style="color: white;"></i>yaswanth karri</a></td>
+      </tr>
+      <tr>
+        <td><a href="#f">FAQ</a></td>
+        <td><a href="https://github.com/yaswanthkarri2004"><i class="fa-brands fa-github fa-lg" style="color: white;"></i>yaswanthkarri2004</a></td>
+      </tr>
+    </table>
+  </footer>
+</html>
